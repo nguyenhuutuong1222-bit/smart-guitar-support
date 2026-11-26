@@ -1585,3 +1585,394 @@ button, input, select, textarea {
     padding: 28px 22px;
   }
 }
+
+
+/* ==========================================================================
+   INTERACTIVE SWIPE SHOWCASE GALLERY (Apple Store × Fretello Touch Carousel)
+   ========================================================================== */
+.section-gallery {
+  background: var(--ivory);
+  color: var(--ivory-ink);
+  padding: 88px 0 36px;
+  position: relative;
+  z-index: 4;
+  overflow: hidden;
+}
+
+.gallery-head-bar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 36px;
+  flex-wrap: wrap;
+}
+
+.gallery-head-copy {
+  max-width: 650px;
+}
+
+.gallery-head-copy h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.4vw, 2.8rem);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+  color: var(--ivory-ink);
+  margin-bottom: 12px;
+}
+
+.gallery-head-copy p {
+  font-size: 1.04rem;
+  color: var(--ivory-muted);
+}
+
+.gallery-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.swipe-hint-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 15px;
+  border-radius: 999px;
+  background: rgba(21, 20, 18, 0.06);
+  color: var(--ivory-muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+  user-select: none;
+}
+
+.gallery-nav-btn {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid rgba(21, 20, 18, 0.14);
+  background: var(--ivory-pure);
+  color: var(--ivory-ink);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(20, 18, 14, 0.07);
+  transition: transform 0.22s var(--ease), background 0.22s ease, border-color 0.22s ease, opacity 0.22s ease;
+}
+
+.gallery-nav-btn:hover {
+  transform: translateY(-2px);
+  background: var(--ivory-ink);
+  color: var(--gold);
+  border-color: var(--ivory-ink);
+}
+
+.gallery-nav-btn:disabled {
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+/* Edge-to-Edge Horizontal Swipe & Drag Track */
+.gallery-viewport {
+  position: relative;
+  width: 100%;
+}
+
+.gallery-track {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 12px max(28px, calc((100vw - var(--max-w)) / 2 + 28px)) 34px;
+  cursor: grab;
+  user-select: none;
+}
+
+.gallery-track::-webkit-scrollbar {
+  display: none;
+}
+
+.gallery-track.is-dragging {
+  cursor: grabbing;
+  scroll-snap-type: none;
+  scroll-behavior: auto;
+}
+
+.gallery-slide {
+  position: relative;
+  flex: 0 0 336px;
+  height: 560px;
+  border-radius: 30px;
+  overflow: hidden;
+  scroll-snap-align: center;
+  background: #0d0f14;
+  box-shadow:
+    0 24px 52px rgba(15, 13, 10, 0.18),
+    0 4px 14px rgba(15, 13, 10, 0.08),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.14);
+  transition: transform 0.38s var(--ease), box-shadow 0.38s var(--ease);
+}
+
+@media (min-width: 768px) {
+  .gallery-slide {
+    scroll-snap-align: start;
+    flex: 0 0 356px;
+    height: 590px;
+  }
+}
+
+.gallery-slide:hover {
+  transform: translateY(-8px) scale(1.015);
+  box-shadow:
+    0 32px 68px rgba(15, 13, 10, 0.26),
+    0 0 0 2px var(--gold);
+}
+
+.gallery-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  pointer-events: none;
+  transition: transform 0.65s var(--ease);
+}
+
+.gallery-slide:hover img {
+  transform: scale(1.045);
+}
+
+/* Top Floating Index & Zoom Icon */
+.slide-top-bar {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  right: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.slide-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 13px;
+  border-radius: 999px;
+  background: rgba(10, 10, 12, 0.62);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--gold-bright);
+}
+
+.slide-zoom-pill {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(10, 10, 12, 0.58);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--white);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.22s ease, color 0.22s ease, transform 0.22s var(--ease);
+}
+
+.gallery-slide:hover .slide-zoom-pill {
+  background: var(--gold);
+  color: #14120e;
+  transform: scale(1.08);
+}
+
+/* Bottom Gradient Caption Overlay */
+.slide-caption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 64px 24px 24px;
+  background: linear-gradient(180deg, rgba(8, 8, 10, 0) 0%, rgba(8, 8, 10, 0.76) 46%, rgba(8, 8, 10, 0.94) 100%);
+  color: var(--white);
+  z-index: 2;
+}
+
+.slide-caption h3 {
+  font-family: var(--font-display);
+  font-size: 1.24rem;
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  line-height: 1.25;
+  margin-bottom: 6px;
+  color: var(--white);
+}
+
+.slide-caption p {
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Interactive Pagination Dots */
+.gallery-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.gallery-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  border: none;
+  background: rgba(21, 20, 18, 0.2);
+  cursor: pointer;
+  padding: 0;
+  transition: width 0.3s var(--ease), background 0.3s ease;
+}
+
+.gallery-dot.is-active {
+  width: 30px;
+  background: #c88a23;
+}
+
+/* Fullscreen Cinema Lightbox */
+.lightbox-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  background: rgba(7, 7, 9, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.28s ease;
+}
+
+.lightbox-modal.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.lightbox-stage {
+  position: relative;
+  max-width: min(92vw, 520px);
+  max-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.lightbox-img-wrap {
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 255, 255, 0.16);
+  max-height: 76vh;
+}
+
+.lightbox-img-wrap img {
+  display: block;
+  max-width: 100%;
+  max-height: 76vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.lightbox-meta {
+  text-align: center;
+  color: var(--white);
+}
+
+.lightbox-meta strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.08rem;
+  color: var(--gold-bright);
+}
+
+.lightbox-meta span {
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.74);
+}
+
+.lightbox-close,
+.lightbox-arrow {
+  position: fixed;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(20, 20, 24, 0.78);
+  color: var(--white);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.lightbox-close:hover,
+.lightbox-arrow:hover {
+  background: var(--gold);
+  color: #14120e;
+  border-color: var(--gold);
+}
+
+.lightbox-close {
+  top: 22px;
+  right: 22px;
+}
+
+.lightbox-arrow.is-prev {
+  left: 22px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.lightbox-arrow.is-next {
+  right: 22px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@media (max-width: 720px) {
+  .section-gallery {
+    padding: 64px 0 24px;
+  }
+  .swipe-hint-pill {
+    display: none;
+  }
+  .gallery-slide {
+    flex: 0 0 82vw;
+    max-width: 330px;
+    height: 510px;
+  }
+  .lightbox-arrow.is-prev {
+    left: 10px;
+  }
+  .lightbox-arrow.is-next {
+    right: 10px;
+  }
+}

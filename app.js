@@ -25,6 +25,9 @@
           ? 'Tìm nhanh câu hỏi (âm thanh iPhone, file .gp, Bluetooth LED...)'
           : 'Search questions (iOS audio, .gp tabs, Bluetooth LED...)';
     }
+    if (typeof window.__syncLightboxCaption === 'function') {
+      window.__syncLightboxCaption();
+    }
   }
 
   // Set language immediately before first paint
@@ -71,7 +74,7 @@
       window.addEventListener(
         'scroll',
         () => {
-          const pos = window.scrollY + 220;
+          const pos = window.scrollY + 240;
           let activeId = sections[0] ? sections[0].id : 'home';
           sections.forEach((sec) => {
             if (sec.offsetTop <= pos) activeId = sec.id;
@@ -90,13 +93,186 @@
         e.preventDefault();
         const store = badge.getAttribute('data-store-badge');
         showToast(
-          `Smart Guitar hỗ trợ đầy đủ ${store} — Xem tính năng hoặc gửi yêu cầu hỗ trợ bên dưới.`,
-          `Smart Guitar supports ${store} — Explore features or contact engineering support below.`
+          `Smart Guitar hỗ trợ đầy đủ ${store} — Khám phá hình ảnh thực tế bên dưới.`,
+          `Smart Guitar supports ${store} — Explore real-world LED showcase below.`
         );
-        const target = document.getElementById('how-it-works');
+        const target = document.getElementById('showcase') || document.getElementById('how-it-works');
         if (target) target.scrollIntoView({ behavior: 'smooth' });
       });
     });
+
+    // ========================================================================
+    // INTERACTIVE SWIPE & DRAG SHOWCASE CAROUSEL + FULLSCREEN LIGHTBOX
+    // ========================================================================
+    const track = document.getElementById('gallery-track');
+    const slides = track ? Array.from(track.querySelectorAll('.gallery-slide')) : [];
+    const dots = Array.from(document.querySelectorAll('.gallery-dot'));
+    const prevBtn = document.getElementById('gallery-prev-btn');
+    const nextBtn = document.getElementById('gallery-next-btn');
+
+    let currentSlideIdx = 0;
+
+    function scrollToSlide(index) {
+      if (!track || slides.length === 0) return;
+      const clamped = Math.max(0, Math.min(slides.length - 1, index));
+      currentSlideIdx = clamped;
+      const slide = slides[clamped];
+      const padLeft = parseFloat(getComputedStyle(track).paddingLeft) || 28;
+      const targetLeft = Math.max(0, slide.offsetLeft - padLeft);
+      track.scrollTo({ left: targetLeft, behavior: 'smooth' });
+      updateGalleryIndicators(clamped);
+    }
+
+    function updateGalleryIndicators(activeIdx) {
+      currentSlideIdx = activeIdx;
+      dots.forEach((d, idx) => d.classList.toggle('is-active', idx === activeIdx));
+      if (prevBtn) prevBtn.disabled = activeIdx <= 0;
+      if (nextBtn) nextBtn.disabled = activeIdx >= slides.length - 1;
+    }
+
+    if (track && slides.length > 0) {
+      // Sync active dot on native touch/wheel scroll
+      let scrollTimer = null;
+      track.addEventListener(
+        'scroll',
+        () => {
+          clearTimeout(scrollTimer);
+          scrollTimer = setTimeout(() => {
+            const padLeft = parseFloat(getComputedStyle(track).paddingLeft) || 28;
+            const scrollRef = track.scrollLeft + padLeft + 80;
+            let bestIdx = 0;
+            let minDist = Infinity;
+            slides.forEach((sl, idx) => {
+              const dist = Math.abs(sl.offsetLeft - scrollRef);
+              if (dist < minDist) {
+                minDist = dist;
+                bestIdx = idx;
+              }
+            });
+            if (track.scrollLeft + track.clientWidth >= track.scrollWidth - 16) {
+              bestIdx = slides.length - 1;
+            }
+            updateGalleryIndicators(bestIdx);
+          }, 40);
+        },
+        { passive: true }
+      );
+
+      if (prevBtn) prevBtn.addEventListener('click', () => scrollToSlide(currentSlideIdx - 1));
+      if (nextBtn) nextBtn.addEventListener('click', () => scrollToSlide(currentSlideIdx + 1));
+      dots.forEach((dot, idx) => {
+        dot.addEventListener('click', () => scrollToSlide(idx));
+      });
+
+      // Desktop Mouse Drag-to-Swipe Physics
+      let isMouseDown = false;
+      let startX = 0;
+      let startScrollLeft = 0;
+      let draggedDistance = 0;
+
+      track.addEventListener('mousedown', (e) => {
+        if (e.button !== 0) return;
+        isMouseDown = true;
+        draggedDistance = 0;
+        startX = e.pageX;
+        startScrollLeft = track.scrollLeft;
+        track.classList.add('is-dragging');
+      });
+
+      window.addEventListener('mousemove', (e) => {
+        if (!isMouseDown) return;
+        const dx = e.pageX - startX;
+        draggedDistance = Math.max(draggedDistance, Math.abs(dx));
+        track.scrollLeft = startScrollLeft - dx * 1.15;
+      });
+
+      window.addEventListener('mouseup', () => {
+        if (!isMouseDown) return;
+        isMouseDown = false;
+        track.classList.remove('is-dragging');
+      });
+
+      // Fullscreen Cinema Lightbox
+      const lightbox = document.getElementById('gallery-lightbox');
+      const lbImg = document.getElementById('lightbox-img');
+      const lbTitle = document.getElementById('lightbox-title');
+      const lbDesc = document.getElementById('lightbox-desc');
+      const lbClose = document.getElementById('lightbox-close');
+      const lbPrev = document.getElementById('lightbox-prev');
+      const lbNext = document.getElementById('lightbox-next');
+      let lbIndex = 0;
+
+      function renderLightboxSlide(idx) {
+        if (!lightbox || slides.length === 0) return;
+        lbIndex = (idx + slides.length) % slides.length;
+        const sl = slides[lbIndex];
+        const imgEl = sl.querySelector('img');
+        const lang = document.documentElement.getAttribute('data-lang') || 'vi';
+        const titleText = sl.getAttribute(lang === 'vi' ? 'data-title-vi' : 'data-title-en') || '';
+        const descText = sl.getAttribute(lang === 'vi' ? 'data-desc-vi' : 'data-desc-en') || '';
+        if (lbImg && imgEl) {
+          lbImg.src = imgEl.getAttribute('src');
+          lbImg.alt = titleText;
+        }
+        if (lbTitle) lbTitle.textContent = `${lbIndex + 1} / ${slides.length} — ${titleText}`;
+        if (lbDesc) lbDesc.textContent = descText;
+      }
+      window.__syncLightboxCaption = () => {
+        if (lightbox && lightbox.classList.contains('is-open')) {
+          renderLightboxSlide(lbIndex);
+        }
+      };
+
+      function openLightbox(idx) {
+        if (!lightbox) return;
+        renderLightboxSlide(idx);
+        lightbox.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeLightbox() {
+        if (!lightbox) return;
+        lightbox.classList.remove('is-open');
+        document.body.style.overflow = '';
+      }
+
+      slides.forEach((sl, idx) => {
+        sl.addEventListener('click', () => {
+          if (draggedDistance > 8) return; // Ignore click at end of mouse drag
+          openLightbox(idx);
+        });
+      });
+
+      if (lbClose) lbClose.addEventListener('click', closeLightbox);
+      if (lbPrev) lbPrev.addEventListener('click', (e) => { e.stopPropagation(); renderLightboxSlide(lbIndex - 1); });
+      if (lbNext) lbNext.addEventListener('click', (e) => { e.stopPropagation(); renderLightboxSlide(lbIndex + 1); });
+      if (lightbox) {
+        lightbox.addEventListener('click', (e) => {
+          if (e.target === lightbox) closeLightbox();
+        });
+        // Touch swipe left/right inside Lightbox
+        let touchStartX = 0;
+        lightbox.addEventListener('touchstart', (e) => {
+          if (e.touches && e.touches[0]) touchStartX = e.touches[0].clientX;
+        }, { passive: true });
+        lightbox.addEventListener('touchend', (e) => {
+          if (!e.changedTouches || !e.changedTouches[0]) return;
+          const diff = e.changedTouches[0].clientX - touchStartX;
+          if (Math.abs(diff) > 45) {
+            renderLightboxSlide(diff < 0 ? lbIndex + 1 : lbIndex - 1);
+          }
+        }, { passive: true });
+      }
+
+      window.addEventListener('keydown', (e) => {
+        if (!lightbox || !lightbox.classList.contains('is-open')) return;
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') renderLightboxSlide(lbIndex - 1);
+        if (e.key === 'ArrowRight') renderLightboxSlide(lbIndex + 1);
+      });
+
+      updateGalleryIndicators(0);
+    }
 
     // Copy Official Support Email
     const copyBtn = document.getElementById('copy-email-btn');
