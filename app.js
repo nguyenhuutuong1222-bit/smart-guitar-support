@@ -1,162 +1,175 @@
 (function () {
-  const html = document.documentElement;
-  const SUPPORT_EMAIL = "nguyenhuutuong1222@gmail.com";
+  const LANG_KEY = 'sg_support_lang';
 
-  // 1. Language (?lang=en|vi -> localStorage -> browser default)
-  const params = new URLSearchParams(window.location.search);
-  const urlLang = params.get("lang");
-  const savedLang = localStorage.getItem("sg_support_lang");
-  const browserEn = navigator.language && !navigator.language.toLowerCase().startsWith("vi");
-  let currentLang = urlLang === "en" || urlLang === "vi"
-    ? urlLang
-    : (savedLang || (browserEn ? "en" : "vi"));
+  function detectInitialLang() {
+    const params = new URLSearchParams(window.location.search);
+    const q = params.get('lang');
+    if (q === 'en' || q === 'vi') return q;
+    const saved = localStorage.getItem(LANG_KEY);
+    if (saved === 'en' || saved === 'vi') return saved;
+    const nav = (navigator.language || '').toLowerCase();
+    return nav.startsWith('vi') ? 'vi' : 'en';
+  }
 
   function applyLang(lang) {
-    currentLang = lang === "en" ? "en" : "vi";
-    html.setAttribute("data-lang", currentLang);
-    html.setAttribute("lang", currentLang);
-    localStorage.setItem("sg_support_lang", currentLang);
-
-    document.querySelectorAll("[data-set-lang]").forEach(function (btn) {
-      btn.classList.toggle("is-active", btn.getAttribute("data-set-lang") === currentLang);
+    document.documentElement.setAttribute('lang', lang);
+    document.documentElement.setAttribute('data-lang', lang);
+    localStorage.setItem(LANG_KEY, lang);
+    document.querySelectorAll('[data-set-lang]').forEach((btn) => {
+      btn.classList.toggle('is-active', btn.getAttribute('data-set-lang') === lang);
     });
-
-    const searchInput = document.getElementById("faq-search-input");
+    const searchInput = document.getElementById('faq-search');
     if (searchInput) {
-      searchInput.placeholder = currentLang === "en"
-        ? "Search help topics (Tuner, .gp files, Bluetooth LED, iOS Audio...)"
-        : "Tìm nhanh câu hỏi (Tuner, tệp .gp, Bluetooth LED, Âm thanh iOS...)";
+      searchInput.placeholder =
+        lang === 'vi'
+          ? 'Tìm nhanh câu hỏi (âm thanh iPhone, file .gp, Bluetooth LED...)'
+          : 'Search questions (iOS audio, .gp tabs, Bluetooth LED...)';
     }
   }
 
-  // 2. Theme
-  const savedTheme = localStorage.getItem("sg_support_theme") || "dark";
-  function applyTheme(theme) {
-    const next = theme === "light" ? "light" : "dark";
-    html.setAttribute("data-theme", next);
-    localStorage.setItem("sg_support_theme", next);
+  // Set language immediately before first paint
+  applyLang(detectInitialLang());
+
+  function showToast(msgVi, msgEn) {
+    const toast = document.getElementById('toast-banner');
+    if (!toast) return;
+    const lang = document.documentElement.getAttribute('data-lang') || 'vi';
+    toast.textContent = lang === 'vi' ? msgVi : msgEn;
+    toast.classList.add('is-visible');
+    clearTimeout(window.__sgToastTimer);
+    window.__sgToastTimer = setTimeout(() => {
+      toast.classList.remove('is-visible');
+    }, 3200);
   }
 
-  applyLang(currentLang);
-  applyTheme(savedTheme);
+  document.addEventListener('DOMContentLoaded', () => {
+    applyLang(document.documentElement.getAttribute('data-lang') || 'vi');
 
-  document.addEventListener("DOMContentLoaded", function () {
-    applyLang(currentLang);
-    applyTheme(html.getAttribute("data-theme"));
+    // Sticky Header Blur on Scroll
+    const header = document.querySelector('.site-header');
+    const syncHeader = () => {
+      if (!header) return;
+      header.classList.toggle('is-scrolled', window.scrollY > 24);
+    };
+    syncHeader();
+    window.addEventListener('scroll', syncHeader, { passive: true });
 
-    document.querySelectorAll("[data-set-lang]").forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        applyLang(btn.getAttribute("data-set-lang"));
+    // Language Switcher
+    document.querySelectorAll('[data-set-lang]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        applyLang(btn.getAttribute('data-set-lang'));
       });
     });
 
-    const themeBtn = document.getElementById("theme-toggle-btn");
-    if (themeBtn) {
-      themeBtn.addEventListener("click", function () {
-        applyTheme(html.getAttribute("data-theme") === "light" ? "dark" : "light");
-      });
-    }
+    // Active Nav Highlight on Scroll (Index Page)
+    const sectionLinks = document.querySelectorAll('.nav-link[data-section]');
+    if (sectionLinks.length > 0) {
+      const sections = Array.from(sectionLinks)
+        .map((l) => document.getElementById(l.getAttribute('data-section')))
+        .filter(Boolean);
 
-    // 3. Copy Email + Toast
-    const toast = document.getElementById("toast");
-    function showToast(msg) {
-      if (!toast) return;
-      toast.textContent = msg;
-      toast.classList.add("is-visible");
-      clearTimeout(toast.__timer);
-      toast.__timer = setTimeout(function () {
-        toast.classList.remove("is-visible");
-      }, 2400);
-    }
-
-    document.querySelectorAll(".js-copy-email").forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(SUPPORT_EMAIL).then(function () {
-            showToast(currentLang === "en" ? "Copied: nguyenhuutuong1222@gmail.com" : "Đã sao chép: nguyenhuutuong1222@gmail.com");
+      window.addEventListener(
+        'scroll',
+        () => {
+          const pos = window.scrollY + 220;
+          let activeId = sections[0] ? sections[0].id : 'home';
+          sections.forEach((sec) => {
+            if (sec.offsetTop <= pos) activeId = sec.id;
           });
-        } else {
-          window.location.href = "mailto:" + SUPPORT_EMAIL;
+          sectionLinks.forEach((l) => {
+            l.classList.toggle('is-active', l.getAttribute('data-section') === activeId);
+          });
+        },
+        { passive: true }
+      );
+    }
+
+    // Store Badges Smooth Action
+    document.querySelectorAll('[data-store-badge]').forEach((badge) => {
+      badge.addEventListener('click', (e) => {
+        e.preventDefault();
+        const store = badge.getAttribute('data-store-badge');
+        showToast(
+          `Smart Guitar hỗ trợ đầy đủ ${store} — Xem tính năng hoặc gửi yêu cầu hỗ trợ bên dưới.`,
+          `Smart Guitar supports ${store} — Explore features or contact engineering support below.`
+        );
+        const target = document.getElementById('how-it-works');
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+
+    // Copy Official Support Email
+    const copyBtn = document.getElementById('copy-email-btn');
+    if (copyBtn) {
+      copyBtn.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText('nguyenhuutuong1222@gmail.com');
+          showToast(
+            'Đã sao chép email: nguyenhuutuong1222@gmail.com',
+            'Copied support email: nguyenhuutuong1222@gmail.com'
+          );
+        } catch (_) {
+          window.location.href = 'mailto:nguyenhuutuong1222@gmail.com';
         }
       });
+    }
+
+    // FAQ Accordion
+    const faqCards = document.querySelectorAll('.faq-card');
+    faqCards.forEach((card) => {
+      const trigger = card.querySelector('.faq-trigger');
+      if (!trigger) return;
+      trigger.addEventListener('click', () => {
+        const willOpen = !card.classList.contains('is-open');
+        faqCards.forEach((c) => c.classList.remove('is-open'));
+        if (willOpen) card.classList.add('is-open');
+      });
     });
 
-    // 4. FAQ Accordion, Category Chips & Instant Search (with '/' shortcut)
-    const faqItems = Array.from(document.querySelectorAll(".faq-item"));
-    const filterChips = Array.from(document.querySelectorAll(".filter-chip"));
-    const searchInput = document.getElementById("faq-search-input");
-    let activeCat = "all";
-
-    faqItems.forEach(function (item) {
-      const btn = item.querySelector(".faq-q");
-      if (btn) {
-        btn.addEventListener("click", function () {
-          item.classList.toggle("is-open");
-        });
-      }
-    });
+    // FAQ Category Filter + Instant Search
+    let currentFilter = 'all';
+    const searchInput = document.getElementById('faq-search');
+    const filterBtns = document.querySelectorAll('[data-filter]');
 
     function filterFaq() {
-      const q = searchInput ? searchInput.value.trim().toLowerCase() : "";
-      faqItems.forEach(function (item) {
-        const cat = item.getAttribute("data-cat") || "all";
-        const catMatch = activeCat === "all" || cat === activeCat;
-        const textMatch = !q || item.textContent.toLowerCase().includes(q);
-        const visible = catMatch && textMatch;
-        item.style.display = visible ? "" : "none";
-        if (q && visible) item.classList.add("is-open");
+      const q = searchInput ? searchInput.value.trim().toLowerCase() : '';
+      faqCards.forEach((card) => {
+        const cat = card.getAttribute('data-cat') || 'all';
+        const matchCat = currentFilter === 'all' || cat === currentFilter;
+        const matchText = !q || card.textContent.toLowerCase().includes(q);
+        card.hidden = !(matchCat && matchText);
       });
     }
 
-    filterChips.forEach(function (chip) {
-      chip.addEventListener("click", function () {
-        activeCat = chip.getAttribute("data-filter") || "all";
-        filterChips.forEach(function (c) {
-          c.classList.toggle("is-active", c === chip);
-        });
+    filterBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        currentFilter = btn.getAttribute('data-filter') || 'all';
+        filterBtns.forEach((b) => b.classList.toggle('is-active', b === btn));
         filterFaq();
       });
     });
 
     if (searchInput) {
-      searchInput.addEventListener("input", filterFaq);
-      document.addEventListener("keydown", function (e) {
-        if (e.key === "/" && document.activeElement !== searchInput && !/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)) {
-          e.preventDefault();
-          searchInput.focus();
-        }
-      });
+      searchInput.addEventListener('input', filterFaq);
     }
 
-    // 5. Support Ticket Composer
-    const supportForm = document.getElementById("support-request-form");
-    if (supportForm) {
-      supportForm.addEventListener("submit", function (e) {
+    // Direct Support Mailto Form
+    const form = document.getElementById('support-ticket-form');
+    if (form) {
+      form.addEventListener('submit', (e) => {
         e.preventDefault();
-        const topicEl = document.getElementById("support-topic");
-        const deviceEl = document.getElementById("support-device");
-        const msgEl = document.getElementById("support-message");
-
-        const topic = topicEl ? topicEl.value : "General Support";
-        const device = deviceEl && deviceEl.value.trim() ? deviceEl.value.trim() : "iOS / Android";
-        const message = msgEl && msgEl.value.trim() ? msgEl.value.trim() : "";
-
-        const subject = "[Smart Guitar Support] " + topic + " (" + device + ")";
-        const body =
-          (currentLang === "en" ? "Device & OS Version: " : "Thiết bị & Hệ điều hành: ") +
-          device +
-          "\n\n" +
-          (currentLang === "en" ? "Issue / Question:\n" : "Nội dung cần hỗ trợ:\n") +
-          message +
-          "\n";
-
-        window.location.href =
-          "mailto:" +
-          SUPPORT_EMAIL +
-          "?subject=" +
-          encodeURIComponent(subject) +
-          "&body=" +
-          encodeURIComponent(body);
+        const device = document.getElementById('ticket-device')?.value || 'iOS / Android';
+        const topic = document.getElementById('ticket-topic')?.value || 'General Support';
+        const msg = document.getElementById('ticket-message')?.value.trim() || '';
+        const subject = encodeURIComponent(`[Smart Guitar Support] ${topic} (${device})`);
+        const body = encodeURIComponent(
+          `Device / OS: ${device}\nTopic: ${topic}\n\nDetails:\n${msg}\n`
+        );
+        window.location.href = `mailto:nguyenhuutuong1222@gmail.com?subject=${subject}&body=${body}`;
+        showToast(
+          'Đang mở ứng dụng Email với nội dung hỗ trợ đã điền sẵn...',
+          'Opening your mail client with pre-filled support details...'
+        );
       });
     }
   });
