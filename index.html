@@ -3,314 +3,405 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Smart Guitar — Official App Support & Help Center</title>
-  <meta name="description" content="Official Support Center, User Guide, and Contact for Smart Guitar (iOS & Android) — Visual Guitar Learning, Tab Player, Tuner & Smart LED Fretboard." />
+  <title>Smart Guitar — Official Support & Studio Help Center</title>
+  <meta name="description" content="Official Support Center, Setup Guides, and Direct Contact for Smart Guitar on iOS & Android." />
   <link rel="icon" type="image/png" href="assets/icon.png" />
   <link rel="apple-touch-icon" href="assets/icon.png" />
-  <link rel="stylesheet" href="styles.css" />
-  <script src="app.js"></script>
+  <link rel="stylesheet" href="styles.css?v=2.0" />
+  <script src="app.js?v=2.0"></script>
 </head>
 <body>
-  <!-- Header -->
-  <header class="topbar">
-    <div class="topbar-inner">
+  <!-- Floating Capsule Navbar -->
+  <div class="nav-wrap">
+    <header class="navbar">
       <a href="index.html" class="brand">
-        <img src="assets/icon.png" alt="Smart Guitar Icon" class="brand-icon" />
-        <div class="brand-text">
+        <img src="assets/icon.png" alt="Smart Guitar" class="brand-icon" />
+        <div class="brand-meta">
           <span class="brand-name">Smart Guitar</span>
-          <span class="brand-tag" data-vi>Trung tâm Hỗ trợ Chính thức</span>
-          <span class="brand-tag" data-en>Official Support Center</span>
+          <span class="brand-chip" data-vi>Hỗ trợ Chính thức</span>
+          <span class="brand-chip" data-en>Official Support</span>
         </div>
       </a>
 
-      <nav class="nav-actions">
-        <a href="index.html" class="nav-link is-active">
-          <span data-vi>Hỗ trợ</span>
-          <span data-en>Support</span>
+      <nav class="nav-center" aria-label="Primary Navigation">
+        <a href="index.html" class="nav-tab is-active">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          <span data-vi>Trung tâm Hỗ trợ</span>
+          <span data-en>Support Hub</span>
         </a>
-        <a href="privacy.html" class="nav-link">
+        <a href="privacy.html" class="nav-tab">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           <span data-vi>Quyền riêng tư</span>
           <span data-en>Privacy Policy</span>
         </a>
-        <button type="button" id="lang-toggle-btn" class="pill-btn" title="Switch Language / Đổi ngôn ngữ">
-          <span>🌐</span>
-          <span id="lang-toggle-label">EN</span>
-        </button>
-        <button type="button" id="theme-toggle-btn" class="pill-btn" title="Toggle Theme / Đổi giao diện">
-          <span id="theme-toggle-label">☀️</span>
-        </button>
       </nav>
-    </div>
-  </header>
+
+      <div class="nav-controls">
+        <div class="seg-lang" role="group" aria-label="Language Switcher">
+          <button type="button" data-set-lang="vi" class="is-active">VN</button>
+          <button type="button" data-set-lang="en">EN</button>
+        </div>
+        <button type="button" id="theme-toggle-btn" class="icon-btn" aria-label="Toggle Light/Dark Theme">
+          <svg class="sun-ico" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+          <svg class="moon-ico" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        </button>
+      </div>
+    </header>
+  </div>
 
   <main class="container">
-    <!-- Hero -->
-    <section class="hero">
-      <div>
-        <div class="hero-badge">
-          <span class="hero-dot"></span>
-          <span data-vi>Hỗ trợ iOS & Android • Phản hồi trong 24h</span>
-          <span data-en>iOS & Android Support • Replies within 24h</span>
+    <!-- Hero Stage -->
+    <section class="hero-stage">
+      <div class="hero-main">
+        <div>
+          <div class="status-pill">
+            <span class="pulse-dot"></span>
+            <span data-vi>iOS & Android • Phản hồi kỹ thuật trong 24h</span>
+            <span data-en>iOS & Android • Direct Engineering Support within 24h</span>
+          </div>
+
+          <h1 class="hero-title" data-vi>
+            Trải nghiệm học Guitar <span class="text-gradient">trực quan & mượt mà</span> trên mọi thiết bị.
+          </h1>
+          <h1 class="hero-title" data-en>
+            Seamless help for your <span class="text-gradient">Smart Guitar Studio</span> journey.
+          </h1>
+
+          <p class="hero-lead" data-vi>
+            Cổng hỗ trợ khách hàng chính thức cho ứng dụng <strong>Smart Guitar - Học Đàn Trực Quan</strong> trên Apple App Store và Google Play. Tra cứu hướng dẫn tính năng, khắc phục sự cố âm thanh / kết nối hoặc liên hệ trực tiếp đội ngũ phát triển.
+          </p>
+          <p class="hero-lead" data-en>
+            Official support hub for <strong>Smart Guitar</strong> on Apple App Store and Google Play. Explore interactive guides, troubleshoot audio or Bluetooth LED sync, or reach our engineering team directly.
+          </p>
         </div>
 
-        <h1 data-vi>Chúng tôi luôn sẵn sàng hỗ trợ hành trình tập Guitar của bạn</h1>
-        <h1 data-en>How can we help with your Smart Guitar experience?</h1>
-
-        <p data-vi>
-          Trang hỗ trợ chính thức cho ứng dụng <strong>Smart Guitar - Học Đàn Trực Quan</strong> trên App Store và Google Play. Tra cứu hướng dẫn nhanh, khắc phục sự cố âm thanh / kết nối hoặc liên hệ trực tiếp với đội ngũ phát triển.
-        </p>
-        <p data-en>
-          Official customer support portal for the <strong>Smart Guitar</strong> mobile app on Apple App Store and Google Play. Browse setup guides, troubleshoot audio or Bluetooth LED connection, or contact our engineering team directly.
-        </p>
-
-        <div class="hero-ctas">
-          <a href="mailto:nguyenhuutuong1222@gmail.com?subject=Smart%20Guitar%20App%20Support" class="btn-primary">
-            <span>✉️</span>
-            <span data-vi>Gửi Email Hỗ trợ ngay</span>
-            <span data-en>Email Support Directly</span>
+        <div class="cta-row">
+          <a href="#ticket-composer" class="btn-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="m22 2-7 20-4-9-9-4 20-7z"/></svg>
+            <span data-vi>Gửi yêu cầu Hỗ trợ</span>
+            <span data-en>Send Support Request</span>
           </a>
           <a href="#faq-section" class="btn-secondary">
-            <span data-vi>Xem Câu hỏi thường gặp</span>
-            <span data-en>Browse FAQs</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            <span data-vi>Tra cứu Câu hỏi thường gặp</span>
+            <span data-en>Browse Knowledge Base</span>
           </a>
         </div>
       </div>
 
-      <!-- Direct Developer Contact Card (Required by Apple Guideline 1.5) -->
-      <aside class="contact-quick-card" aria-label="Direct Contact Information">
-        <span class="contact-quick-label" data-vi>Liên hệ Nhà phát triển trực tiếp</span>
-        <span class="contact-quick-label" data-en>Direct Developer Contact</span>
-
-        <div class="contact-email-box">
-          <span>nguyenhuutuong1222@gmail.com</span>
-          <button type="button" id="copy-email-btn" class="copy-btn">
-            <span data-vi>Sao chép</span>
-            <span data-en>Copy</span>
-          </button>
+      <!-- Right Studio Acoustic Card -->
+      <aside class="hero-studio-card" aria-label="Direct Contact & Studio Status">
+        <div class="studio-visual-box">
+          <div class="studio-visual-top">
+            <span>SMART GUITAR STUDIO • v1.0</span>
+            <span style="color: var(--emerald);">● A4 = 440 Hz</span>
+          </div>
+          <!-- Crisp Vector 6-String Harmonic Stage -->
+          <svg class="studio-strings-svg" viewBox="0 0 320 68" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <line x1="8" y1="8" x2="312" y2="8" stroke="rgba(148,163,184,0.25)" stroke-width="1"/>
+            <line x1="8" y1="18" x2="312" y2="18" stroke="rgba(148,163,184,0.28)" stroke-width="1.2"/>
+            <path class="string-wave" d="M8 29 Q 85 21, 160 29 T 312 29" stroke="#ff9500" stroke-width="2" fill="none"/>
+            <line x1="8" y1="40" x2="312" y2="40" stroke="rgba(148,163,184,0.32)" stroke-width="1.5"/>
+            <line x1="8" y1="50" x2="312" y2="50" stroke="rgba(148,163,184,0.38)" stroke-width="1.8"/>
+            <line x1="8" y1="60" x2="312" y2="60" stroke="rgba(148,163,184,0.45)" stroke-width="2.1"/>
+            <circle cx="160" cy="29" r="6" fill="#ff9500"/>
+            <circle cx="160" cy="29" r="12" stroke="#ff9500" stroke-opacity="0.35" stroke-width="2"/>
+            <circle cx="96" cy="40" r="4.5" fill="#10b981"/>
+            <circle cx="226" cy="18" r="4.5" fill="#38bdf8"/>
+          </svg>
         </div>
 
-        <div class="contact-meta-row">
-          <span data-vi>Ứng dụng</span>
-          <span data-en>Application</span>
-          <strong>Smart Guitar (iOS / Android)</strong>
+        <div class="direct-contact-panel">
+          <span class="micro-heading" data-vi>Email Hỗ trợ Trực tiếp (24/7)</span>
+          <span class="micro-heading" data-en>Direct Developer Contact</span>
+
+          <div class="email-copy-bar">
+            <span class="mono">nguyenhuutuong1222@gmail.com</span>
+            <button type="button" class="copy-pill js-copy-email">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+              <span data-vi>Sao chép</span>
+              <span data-en>Copy</span>
+            </button>
+          </div>
         </div>
-        <div class="contact-meta-row">
-          <span data-vi>Thời gian phản hồi</span>
-          <span data-en>Response Time</span>
-          <strong data-vi>Trong vòng 24 giờ làm việc</strong>
-          <strong data-en>Within 24 business hours</strong>
-        </div>
-        <div class="contact-meta-row">
-          <span data-vi>Tài khoản yêu cầu</span>
-          <span data-en>Account Required</span>
-          <strong data-vi>Không cần đăng ký (Offline-first)</strong>
-          <strong data-en>None (100% Offline-capable)</strong>
+
+        <div class="meta-badges-grid">
+          <div class="mini-stat">
+            <span data-vi>Đăng ký tài khoản</span>
+            <span data-en>Account Sign-up</span>
+            <strong data-vi>Không yêu cầu</strong>
+            <strong data-en>Not Required</strong>
+          </div>
+          <div class="mini-stat">
+            <span data-vi>Quyền riêng tư</span>
+            <span data-en>Data Privacy</span>
+            <strong data-vi>100% Trên thiết bị</strong>
+            <strong data-en>100% On-Device</strong>
+          </div>
         </div>
       </aside>
     </section>
 
-    <!-- Core Feature Guides -->
-    <div class="section-head">
-      <h2 class="section-title" data-vi>Hướng dẫn nhanh các tính năng chính</h2>
-      <h2 class="section-title" data-en>Quick Feature Guides</h2>
-      <span class="section-sub" data-vi>Thiết kế tối giản, mở ứng dụng là luyện tập ngay không cần đăng nhập</span>
-      <span class="section-sub" data-en>Minimalist studio tools — launch and play immediately without sign-up</span>
+    <!-- Asymmetric Bento Feature Guides -->
+    <div class="sec-header">
+      <div>
+        <span class="sec-eyebrow" data-vi>Hệ sinh thái luyện tập</span>
+        <span class="sec-eyebrow" data-en>Product Ecosystem</span>
+        <h2 class="sec-title" data-vi>Hướng dẫn nhanh các phân hệ trong ứng dụng</h2>
+        <h2 class="sec-title" data-en>Explore Core Studio Modules</h2>
+      </div>
+      <p class="sec-desc" data-vi>Mở ứng dụng là tập ngay • Tương thích mọi cây đàn guitar thông thường</p>
+      <p class="sec-desc" data-en>Zero login friction • Works standalone with any standard guitar</p>
     </div>
 
-    <section class="bento-grid-4">
-      <div class="bento-card">
-        <div class="icon-box icon-box--emerald">📚</div>
-        <h3 data-vi>Khóa học & Tiến độ</h3>
-        <h3 data-en>Courses & Progress</h3>
-        <p data-vi>Lộ trình 6 khóa học bài bản từ cơ bản đến nâng cao kèm cần đàn 24 ngăn tương tác và thống kê chuỗi ngày tập tự động trên thiết bị.</p>
-        <p data-en>Structured 6-course curriculum with interactive 24-fret diagrams and automatic on-device day streak & activity tracking.</p>
-      </div>
+    <section class="bento-showcase">
+      <!-- Tile 1 (Span 7) -->
+      <article class="bento-tile span-7">
+        <div class="tile-head">
+          <div class="tile-icon tile-icon--amber">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+          </div>
+          <span class="tile-tag">Guitar Pro Engine</span>
+        </div>
+        <div>
+          <h3 data-vi>Chơi theo Tab tương tác & Trực quan hóa nốt nhạc</h3>
+          <h3 data-en>Interactive Tab Player & Real-Time Visualizer</h3>
+          <p data-vi>Hỗ trợ mở trực tiếp các tệp <code>.gp</code>, <code>.gp3</code>, <code>.gp4</code>, <code>.gp5</code>, <code>.gpx</code> từ điện thoại của bạn. Tùy chỉnh tốc độ từ 0.25x đến 2.0x không biến dạng cao độ, lặp đoạn khó (Loop), bật Cần đàn 24 ngăn và chế độ chạy nốt Trực quan.</p>
+          <p data-en>Open <code>.gp</code>, <code>.gp3</code>, <code>.gp4</code>, <code>.gp5</code>, and <code>.gpx</code> files directly from your device. Practice at 0.25x–2.0x with pitch preservation, loop tricky bars, and toggle the live 24-fret neck or note Visualizer.</p>
+        </div>
+        <div class="tile-chips">
+          <span>Pitch-Preserved Speed</span>
+          <span>A–B Loop</span>
+          <span>24-Fret Neck</span>
+          <span>Multi-Track Mixer</span>
+        </div>
+      </article>
 
-      <div class="bento-card">
-        <div class="icon-box icon-box--amber">🎼</div>
-        <h3 data-vi>Chơi theo Tab (.GP)</h3>
-        <h3 data-en>Interactive Tab Player</h3>
-        <p data-vi>Mở tệp Guitar Pro (.gp, .gp3–.gpx) từ máy của bạn, tùy chỉnh tốc độ 0.25x–2.0x giữ nguyên cao độ, lặp đoạn Loop và chế độ Trực quan.</p>
-        <p data-en>Load Guitar Pro files (.gp, .gp3–.gpx) locally, adjust playback speed (0.25x–2.0x pitch-preserved), loop sections, and switch to Visualizer mode.</p>
-      </div>
+      <!-- Tile 2 (Span 5) -->
+      <article class="bento-tile span-5">
+        <div class="tile-head">
+          <div class="tile-icon tile-icon--emerald">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="m9 10 2 2 4-4"/></svg>
+          </div>
+          <span class="tile-tag" data-vi>6 Khóa • 48 Bài</span>
+          <span class="tile-tag" data-en>6 Courses • 48 Lessons</span>
+        </div>
+        <div>
+          <h3 data-vi>Lộ trình Khóa học & Thống kê Tiến độ</h3>
+          <h3 data-en>Structured Courses & Habit Tracking</h3>
+          <p data-vi>Giáo trình từng bước từ nhập môn, chuyển hợp âm, quạt chả đến kỹ thuật solo, kết hợp tự động ghi nhận chuỗi ngày chăm chỉ (Streak) và biểu đồ 7 ngày.</p>
+          <p data-en>Step-by-step lessons from open chords and strumming to lead techniques, paired with automatic day streak and 7-day pace analytics.</p>
+        </div>
+        <div class="tile-chips">
+          <span data-vi>Lộ trình bài bản</span>
+          <span data-en>Guided Syllabus</span>
+          <span>Streak Analytics</span>
+        </div>
+      </article>
 
-      <div class="bento-card">
-        <div class="icon-box icon-box--blue">🎯</div>
-        <h3 data-vi>Máy lên dây & Metronome</h3>
-        <h3 data-en>Chromatic Tuner & Metronome</h3>
-        <p data-vi>Nhận diện tần số dây đàn độ chính xác cao theo chuẩn A4 = 440/432/442 Hz cùng máy đập nhịp hỗ trợ hẹn giờ luyện tập.</p>
-        <p data-en>High-precision real-time pitch detection (A4 = 440/432/442 Hz) paired with a studio metronome and practice countdown timer.</p>
-      </div>
+      <!-- Tile 3 (Span 6) -->
+      <article class="bento-tile span-6">
+        <div class="tile-head">
+          <div class="tile-icon tile-icon--cyan">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 2v8a5 5 0 0 0 10 0V2"/><path d="M12 15v7"/><path d="M3 6a9 9 0 0 1 0 6"/><path d="M21 6a9 9 0 0 0 0 6"/></svg>
+          </div>
+          <span class="tile-tag">YIN DSP • 120 FPS</span>
+        </div>
+        <div>
+          <h3 data-vi>Máy lên dây chuẩn phòng thu & Metronome</h3>
+          <h3 data-en>Studio Chromatic Tuner & Metronome</h3>
+          <p data-vi>Thuật toán YIN DSP bắt tần số dây trầm chính xác, hỗ trợ chuẩn A4 = 440 / 432 / 442 Hz, chế độ Tự động hoặc Thủ công cùng máy gõ nhịp có hẹn giờ tập.</p>
+          <p data-en>Precision YIN pitch detection supporting A4 = 440 / 432 / 442 Hz calibration, Auto/Manual string lock, and a lookahead Metronome with countdown timer.</p>
+        </div>
+      </article>
 
-      <div class="bento-card">
-        <div class="icon-box icon-box--rose">💡</div>
-        <h3 data-vi>Backing Track & Đèn LED</h3>
-        <h3 data-en>Backing Track & LED Sync</h3>
-        <p data-vi>Tự tạo vòng hợp âm đệm hát đa nhạc cụ và tùy chọn đồng bộ Bluetooth BLE / Wi-Fi với phần cứng cần đàn LED Smart Guitar.</p>
-        <p data-en>Build custom chord progressions and optionally sync real-time fret positions over Bluetooth LE or local Wi-Fi to Smart Guitar LED hardware.</p>
-      </div>
+      <!-- Tile 4 (Span 6) -->
+      <article class="bento-tile span-6">
+        <div class="tile-head">
+          <div class="tile-icon tile-icon--violet">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10v4"/><path d="M7.5 6v12"/><path d="M12 3v18"/><path d="M16.5 7v10"/><path d="M21 10v4"/></svg>
+          </div>
+          <span class="tile-tag">Chord & BLE LED</span>
+        </div>
+        <div>
+          <h3 data-vi>Thư viện Hợp âm, Backing Track & Đèn LED</h3>
+          <h3 data-en>Chord Library, Backing Studio & LED Sync</h3>
+          <p data-vi>Tra cứu thế bấm Hợp âm, Âm giai, Rải âm; tự dựng vòng hòa thanh đệm hát và tùy chọn đồng bộ nốt sáng đèn qua Bluetooth BLE / Wi-Fi lên cần đàn LED.</p>
+          <p data-en>Look up Chords, Scales, and Arpeggios; build custom backing progressions; and optionally stream fret positions over BLE / Wi-Fi to Smart Guitar LED hardware.</p>
+        </div>
+      </article>
     </section>
 
-    <!-- FAQ + Support Ticket Form -->
-    <section id="faq-section" class="support-split">
-      <!-- Left: Searchable FAQ -->
+    <!-- FAQ & Ticket Composer -->
+    <div id="faq-section" class="sec-header">
       <div>
-        <div class="section-head" style="margin-top: 0;">
-          <h2 class="section-title" data-vi>Câu hỏi thường gặp & Khắc phục sự cố</h2>
-          <h2 class="section-title" data-en>Frequently Asked Questions & Troubleshooting</h2>
-        </div>
+        <span class="sec-eyebrow" data-vi>Giải đáp & Khắc phục nhanh</span>
+        <span class="sec-eyebrow" data-en>Troubleshooting & FAQ</span>
+        <h2 class="sec-title" data-vi>Câu hỏi thường gặp</h2>
+        <h2 class="sec-title" data-en>Frequently Asked Questions</h2>
+      </div>
+    </div>
 
-        <div class="faq-search-wrap">
-          <span class="faq-search-icon">🔍</span>
-          <input type="search" id="faq-search-input" class="faq-search" placeholder="Tìm nhanh câu hỏi..." />
+    <section class="support-workspace">
+      <!-- Left: Filterable FAQ -->
+      <div>
+        <div class="faq-toolbar">
+          <div class="search-box">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            <input type="search" id="faq-search-input" class="search-input" placeholder="Tìm nhanh câu hỏi..." />
+            <span class="kbd-hint">/</span>
+          </div>
+
+          <div class="filter-pills">
+            <button type="button" class="filter-chip is-active" data-filter="all">
+              <span data-vi>Tất cả</span><span data-en>All Topics</span>
+            </button>
+            <button type="button" class="filter-chip" data-filter="audio">
+              <span data-vi>Âm thanh & iOS</span><span data-en>Audio & iOS</span>
+            </button>
+            <button type="button" class="filter-chip" data-filter="tab">
+              <span data-vi>Tuner & Tab .GP</span><span data-en>Tuner & .GP Tabs</span>
+            </button>
+            <button type="button" class="filter-chip" data-filter="led">
+              <span data-vi>Phần cứng LED & Dữ liệu</span><span data-en>LED Hardware & Data</span>
+            </button>
+          </div>
         </div>
 
         <div class="faq-list">
-          <!-- FAQ 1 -->
-          <div class="faq-item is-open">
+          <!-- Q1 -->
+          <div class="faq-item is-open" data-cat="audio">
             <button type="button" class="faq-q">
-              <span data-vi>1. Vì sao trên iPhone/iPad không nghe thấy tiếng nhạc khi phát Tab hoặc Metronome?</span>
-              <span data-en>1. Why is there no sound on iPhone/iPad when playing Tabs or Metronome?</span>
-              <span class="faq-chevron">▾</span>
+              <span data-vi>Làm sao khắc phục khi không nghe thấy tiếng phát Tab hoặc Metronome trên iPhone?</span>
+              <span data-en>Why is there no sound when playing Tabs or Metronome on iPhone / iPad?</span>
+              <span class="faq-icon-plus">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </span>
             </button>
-            <div class="faq-a">
-              <p data-vi>
-                Hãy kiểm tra âm lượng media của máy và đảm bảo iPhone không đang kết nối nhầm sang tai nghe Bluetooth khác. Nếu bạn vừa mở khóa màn hình lại, chỉ cần bấm nút <strong>Phát (Play)</strong> một lần để hệ thống âm thanh khôi phục ngay lập tức.
-              </p>
-              <p data-en>
-                Please check your device media volume and verify that audio is not routed to an external Bluetooth headset. After unlocking your screen, simply tap <strong>Play</strong> once to resume playback immediately.
-              </p>
-            </div>
+            <div class="faq-a-grid"><div class="faq-a-inner"><div class="faq-a-content">
+              <p data-vi>Hãy tăng âm lượng Media trên máy và kiểm tra xem điện thoại có đang tự kết nối với tai nghe Bluetooth khác không. Ngoài ra, nếu bạn vừa mở khóa màn hình trở lại ứng dụng, chỉ cần chạm nút <strong>Phát (Play)</strong> một lần để kênh âm thanh được đánh thức ngay lập tức.</p>
+              <p data-en>Ensure your device media volume is turned up and check that audio isn't routed to a nearby Bluetooth speaker or headset. After unlocking your device screen, simply tap <strong>Play</strong> once to reactivate the audio engine.</p>
+            </div></div></div>
           </div>
 
-          <!-- FAQ 2 -->
-          <div class="faq-item">
+          <!-- Q2 -->
+          <div class="faq-item" data-cat="tab">
             <button type="button" class="faq-q">
-              <span data-vi>2. Máy lên dây đàn (Tuner) báo chưa có quyền Micro thì bật lại ở đâu?</span>
-              <span data-en>2. How do I enable Microphone permission for the Guitar Tuner?</span>
-              <span class="faq-chevron">▾</span>
+              <span data-vi>Cách cấp lại quyền Micro cho tính năng Lên dây đàn (Tuner)?</span>
+              <span data-en>How do I enable Microphone access for the Guitar Tuner?</span>
+              <span class="faq-icon-plus">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </span>
             </button>
-            <div class="faq-a">
-              <p data-vi>
-                Trên <strong>iOS</strong>: Vào <em>Cài đặt → Smart Guitar → bật Micro</em>. Trên <strong>Android</strong>: Vào <em>Cài đặt → Ứng dụng → Smart Guitar → Quyền → cho phép Micro</em>. Tín hiệu âm thanh chỉ dùng để đo tần số tại chỗ, hoàn toàn không ghi âm hay gửi đi đâu.
-              </p>
-              <p data-en>
-                On <strong>iOS</strong>: Open <em>Settings → Smart Guitar → toggle Microphone ON</em>. On <strong>Android</strong>: Open <em>Settings → Apps → Smart Guitar → Permissions → allow Microphone</em>. Audio is analyzed strictly in RAM for pitch detection and is never recorded or transmitted.
-              </p>
-            </div>
+            <div class="faq-a-grid"><div class="faq-a-inner"><div class="faq-a-content">
+              <p data-vi>Trên <strong>iPhone/iPad</strong>: mở <code>Cài đặt → Smart Guitar → bật Micro</code>. Trên <strong>Android</strong>: mở <code>Cài đặt → Ứng dụng → Smart Guitar → Quyền → cho phép Micro</code>. Âm thanh chỉ xử lý tần số tức thời trên RAM, tuyệt đối không ghi âm hay gửi lên mạng.</p>
+              <p data-en>On <strong>iOS</strong>: go to <code>Settings → Smart Guitar → toggle Microphone ON</code>. On <strong>Android</strong>: go to <code>Settings → Apps → Smart Guitar → Permissions → allow Microphone</code>. Pitch analysis happens strictly in RAM and audio is never recorded.</p>
+            </div></div></div>
           </div>
 
-          <!-- FAQ 3 -->
-          <div class="faq-item">
+          <!-- Q3 -->
+          <div class="faq-item" data-cat="tab">
             <button type="button" class="faq-q">
-              <span data-vi>3. Làm sao để tải tệp nhạc Guitar Pro (.gp) vào mục Chơi theo Tab?</span>
-              <span data-en>3. How do I load Guitar Pro (.gp) files into the Tab Player?</span>
-              <span class="faq-chevron">▾</span>
+              <span data-vi>Làm thế nào để mở tệp nhạc Guitar Pro (.gp) của riêng tôi?</span>
+              <span data-en>How do I import my own Guitar Pro (.gp) tab files?</span>
+              <span class="faq-icon-plus">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </span>
             </button>
-            <div class="faq-a">
-              <p data-vi>
-                Khi mở mục <strong>Chơi theo tab</strong>, ngăn <strong>Thư viện Tab</strong> bên trái sẽ tự động mở ra. Bạn chạm vào nút màu cam <strong>TẢI LÊN TAB (.GP)</strong> và chọn tệp định dạng <code>.gp</code>, <code>.gp3</code>, <code>.gp4</code>, <code>.gp5</code> hoặc <code>.gpx</code> lưu trong tệp điện thoại.
-              </p>
-              <p data-en>
-                When entering <strong>Play by Tab</strong>, the left <strong>Tab Library</strong> drawer opens automatically. Tap <strong>UPLOAD TAB (.GP)</strong> and select any <code>.gp</code>, <code>.gp3</code>, <code>.gp4</code>, <code>.gp5</code>, or <code>.gpx</code> file stored in your device's Files app.
-              </p>
-            </div>
+            <div class="faq-a-grid"><div class="faq-a-inner"><div class="faq-a-content">
+              <p data-vi>Khi vào thẻ <strong>Chơi theo tab</strong>, ngăn <strong>Thư viện Tab</strong> bên trái sẽ tự động mở. Chạm nút <strong>TẢI LÊN TAB (.GP)</strong> và chọn tệp <code>.gp</code>, <code>.gp3</code>, <code>.gp4</code>, <code>.gp5</code> hoặc <code>.gpx</code> trong ứng dụng Tệp (Files) của máy.</p>
+              <p data-en>Open <strong>Play by Tab</strong> and tap <strong>UPLOAD TAB (.GP)</strong> inside the left Tab Library drawer. Select any <code>.gp</code>, <code>.gp3</code>, <code>.gp4</code>, <code>.gp5</code>, or <code>.gpx</code> file from your device's Files storage.</p>
+            </div></div></div>
           </div>
 
-          <!-- FAQ 4 -->
-          <div class="faq-item">
+          <!-- Q4 -->
+          <div class="faq-item" data-cat="led">
             <button type="button" class="faq-q">
-              <span data-vi>4. Tôi không có phần cứng cần đàn LED thì có dùng đầy đủ ứng dụng được không?</span>
-              <span data-en>4. Can I use all app features without Smart Guitar LED hardware?</span>
-              <span class="faq-chevron">▾</span>
+              <span data-vi>Không có phụ kiện cần đàn LED thì có dùng đầy đủ tính năng của ứng dụng được không?</span>
+              <span data-en>Does the app work completely without Smart Guitar LED hardware?</span>
+              <span class="faq-icon-plus">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </span>
             </button>
-            <div class="faq-a">
-              <p data-vi>
-                <strong>Hoàn toàn được 100%!</strong> Tất cả các tính năng Khóa học, Chơi theo Tab, Cần đàn ảo 24 ngăn, Thư viện Hợp âm / Âm giai, Tạo Backing Track, Tuner và Metronome đều hoạt động độc lập với bất kỳ cây đàn guitar mộc hay guitar điện thông thường nào.
-              </p>
-              <p data-en>
-                <strong>Yes, 100%!</strong> All Courses, Interactive Tab Player, 24-Fret Virtual Neck, Chord/Scale/Arpeggio Library, Backing Track Studio, Tuner, and Metronome work standalone with any standard acoustic, classical, or electric guitar.
-              </p>
-            </div>
+            <div class="faq-a-grid"><div class="faq-a-inner"><div class="faq-a-content">
+              <p data-vi><strong>Dùng đầy đủ 100%!</strong> Toàn bộ Khóa học, Chơi theo Tab, Cần đàn ảo 24 ngăn, Thư viện Hợp âm / Âm giai, Backing Track, Tuner và Metronome đều được thiết kế để sử dụng độc lập với bất kỳ cây đàn guitar truyền thống nào.</p>
+              <p data-en><strong>Yes, 100%!</strong> Every Course, Tab Player feature, 24-Fret Virtual Neck, Chord/Scale Library, Backing Track Studio, Tuner, and Metronome works standalone with any acoustic, classical, or electric guitar.</p>
+            </div></div></div>
           </div>
 
-          <!-- FAQ 5 -->
-          <div class="faq-item">
+          <!-- Q5 -->
+          <div class="faq-item" data-cat="led">
             <button type="button" class="faq-q">
-              <span data-vi>5. Làm sao kết nối với phần cứng cần đàn LED Smart Guitar (Bluetooth / Wi-Fi)?</span>
-              <span data-en>5. How do I connect optional Smart Guitar LED hardware via Bluetooth or Wi-Fi?</span>
-              <span class="faq-chevron">▾</span>
+              <span data-vi>Hướng dẫn ghép nối phần cứng cần đàn LED qua Bluetooth BLE hoặc Wi-Fi?</span>
+              <span data-en>How do I pair optional Smart Guitar LED hardware via Bluetooth LE or Wi-Fi?</span>
+              <span class="faq-icon-plus">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </span>
             </button>
-            <div class="faq-a">
-              <p data-vi>
-                Từ Trang chủ, chạm vào thanh trạng thái <strong>Cần đàn LED</strong> (hoặc mục <strong>Cài đặt</strong>): chọn tab <strong>Bluetooth</strong> rồi bấm <em>Quét & Kết nối BLE</em> (nhớ bật Bluetooth trên điện thoại), hoặc chọn tab <strong>Wi-Fi</strong> và nhập địa chỉ IP hiển thị trên mạch điều khiển trong cùng mạng Wi-Fi nội bộ.
-              </p>
-              <p data-en>
-                From the Home screen, tap the <strong>LED Fretboard</strong> status bar (or open <strong>Settings</strong>): select <strong>Bluetooth</strong> and tap <em>Scan & Connect BLE</em>, or select <strong>Wi-Fi</strong> and enter your controller's local IP address on the same Wi-Fi network.
-              </p>
-            </div>
+            <div class="faq-a-grid"><div class="faq-a-inner"><div class="faq-a-content">
+              <p data-vi>Bấm vào thanh <strong>Cần đàn LED</strong> trên Trang chủ (hoặc mở <strong>Cài đặt</strong>): chọn <strong>Bluetooth</strong> và nhấn <em>Quét & Kết nối BLE</em> ngay trong ứng dụng (không cần ghép đôi trong Cài đặt hệ thống), hoặc chọn <strong>Wi-Fi</strong> và nhập địa chỉ IP nội bộ của mạch điều khiển.</p>
+              <p data-en>Tap the <strong>LED Fretboard</strong> pill on the Home screen (or open <strong>Settings</strong>): select <strong>Bluetooth</strong> and tap <em>Scan & Connect BLE</em> directly inside the app, or choose <strong>Wi-Fi</strong> and enter your controller's local IP address.</p>
+            </div></div></div>
           </div>
 
-          <!-- FAQ 6 -->
-          <div class="faq-item">
+          <!-- Q6 -->
+          <div class="faq-item" data-cat="led">
             <button type="button" class="faq-q">
-              <span data-vi>6. Dữ liệu tiến độ học tập được lưu ở đâu? Làm sao để xóa hoặc đặt lại từ đầu?</span>
-              <span data-en>6. Where is my learning progress stored, and how can I reset it?</span>
-              <span class="faq-chevron">▾</span>
+              <span data-vi>Làm sao để xóa sạch lịch sử luyện tập và đặt lại tiến độ từ đầu?</span>
+              <span data-en>How can I clear my local activity history and reset course progress?</span>
+              <span class="faq-icon-plus">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </span>
             </button>
-            <div class="faq-a">
-              <p data-vi>
-                Mọi tiến độ bài học và chuỗi ngày luyện tập chỉ lưu cục bộ ngay trên điện thoại của bạn (không tải lên máy chủ). Bạn có thể xóa sạch bất cứ lúc nào bằng cách vào thẻ <strong>Tiến độ</strong> → bấm nút <strong>Đặt lại</strong> ở góc trên bên phải.
-              </p>
-              <p data-en>
-                All lesson checkmarks and practice streaks are stored strictly locally on your device (never uploaded to external servers). You can clear everything anytime by opening <strong>Progress</strong> and tapping <strong>Reset</strong> in the top-right corner.
-              </p>
-            </div>
+            <div class="faq-a-grid"><div class="faq-a-inner"><div class="faq-a-content">
+              <p data-vi>Mọi tiến độ chỉ lưu cục bộ trên điện thoại của bạn. Để xóa sạch và bắt đầu lại, hãy mở mục <strong>Tiến độ</strong> từ Trang chủ → chạm nút <strong>Đặt lại</strong> ở góc trên bên phải và xác nhận.</p>
+              <p data-en>All progress is stored strictly on your device. To erase your streak and lesson checkmarks, open <strong>Progress</strong> from the Home screen and tap <strong>Reset</strong> in the top-right corner.</p>
+            </div></div></div>
           </div>
         </div>
       </div>
 
-      <!-- Right: Quick Support Request Form -->
-      <aside class="bento-card">
-        <h3 data-vi>Gửi yêu cầu hỗ trợ / Báo lỗi nhanh</h3>
-        <h3 data-en>Send a Support Request / Bug Report</h3>
-        <p data-vi>Điền thông tin bên dưới để soạn nhanh email gửi thẳng tới bộ phận kỹ thuật Smart Guitar.</p>
-        <p data-en>Fill out the details below to open a pre-addressed support message to our team.</p>
+      <!-- Right: Sticky Support Ticket Composer -->
+      <aside id="ticket-composer" class="composer-card">
+        <h3 data-vi>Gửi yêu cầu hỗ trợ kỹ thuật</h3>
+        <h3 data-en>Contact Engineering Support</h3>
+        <p data-vi>Soạn nhanh phiếu hỗ trợ gửi trực tiếp tới hộp thư nhà phát triển Smart Guitar.</p>
+        <p data-en>Open a pre-formatted support email addressed directly to our development team.</p>
 
-        <form id="support-request-form" style="margin-top: 6px;">
-          <div class="form-group">
-            <label for="support-topic" class="form-label">
-              <span data-vi>Chủ đề hỗ trợ</span>
-              <span data-en>Support Topic</span>
+        <form id="support-request-form">
+          <div class="field">
+            <label for="support-topic">
+              <span data-vi>Danh mục cần hỗ trợ</span>
+              <span data-en>Topic</span>
             </label>
-            <select id="support-topic" class="form-control">
-              <option value="Technical Support / Audio & Playback">Hỗ trợ kỹ thuật / Âm thanh & Phát nhạc (Audio & Playback)</option>
-              <option value="Guitar Tuner & Microphone">Máy lên dây đàn & Quyền Micro (Tuner & Mic)</option>
-              <option value="Tab Player (.GP Files)">Chơi theo Tab / Tệp .GP (Tab Player)</option>
-              <option value="LED Fretboard Hardware (BLE / Wi-Fi)">Kết nối Cần đàn LED (Bluetooth / Wi-Fi)</option>
-              <option value="Feature Request / Feedback">Góp ý tính năng mới (Feedback)</option>
+            <select id="support-topic" class="input-ctrl">
+              <option value="Audio & Playback">Âm thanh & Phát nhạc / Audio & Playback</option>
+              <option value="Guitar Tuner & Microphone">Lên dây đàn & Micro / Tuner & Mic</option>
+              <option value="Tab Player (.GP Files)">Chơi theo Tab (.GP) / Tab Player</option>
+              <option value="LED Hardware Sync (BLE / Wi-Fi)">Kết nối Đèn LED / BLE & Wi-Fi Sync</option>
+              <option value="Feature Suggestion & Feedback">Góp ý cải tiến / Feature Feedback</option>
             </select>
           </div>
 
-          <div class="form-group">
-            <label for="support-device" class="form-label">
-              <span data-vi>Thiết bị & Phiên bản hệ điều hành</span>
-              <span data-en>Device Model & OS Version</span>
+          <div class="field">
+            <label for="support-device">
+              <span data-vi>Thiết bị & Hệ điều hành</span>
+              <span data-en>Device & OS Version</span>
             </label>
-            <input type="text" id="support-device" class="form-control" placeholder="VD: iPhone 15 (iOS 18) / Samsung S24..." />
+            <input type="text" id="support-device" class="input-ctrl" placeholder="iPhone 15 Pro (iOS 18.2) / Galaxy S24..." />
           </div>
 
-          <div class="form-group">
-            <label for="support-message" class="form-label">
-              <span data-vi>Mô tả chi tiết vấn đề bạn gặp phải</span>
-              <span data-en>Describe your question or issue</span>
+          <div class="field">
+            <label for="support-message">
+              <span data-vi>Nội dung chi tiết</span>
+              <span data-en>How can we help?</span>
             </label>
-            <textarea id="support-message" class="form-control" required placeholder="Mô tả thao tác hoặc câu hỏi của bạn..."></textarea>
+            <textarea id="support-message" class="input-ctrl" required placeholder="Mô tả chi tiết câu hỏi hoặc tình huống bạn gặp phải..."></textarea>
           </div>
 
-          <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">
-            <span>🚀</span>
-            <span data-vi>Tạo Email gửi Hỗ trợ</span>
+          <button type="submit" class="btn-primary" style="width: 100%;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            <span data-vi>Soạn & Gửi Email Hỗ trợ</span>
             <span data-en>Compose Support Email</span>
           </button>
         </form>
@@ -318,23 +409,16 @@
     </section>
   </main>
 
-  <!-- Footer -->
   <footer class="footer">
     <div class="footer-inner">
       <div>
         © 2026 <strong>Smart Guitar</strong>.
-        <span data-vi>Mọi quyền được bảo lưu.</span>
-        <span data-en>All rights reserved.</span>
+        <span data-vi>Thiết kế cho người yêu Guitar trên iOS & Android.</span>
+        <span data-en>Crafted for guitarists on iOS & Android.</span>
       </div>
       <div class="footer-links">
-        <a href="index.html">
-          <span data-vi>Trung tâm Hỗ trợ</span>
-          <span data-en>Support Center</span>
-        </a>
-        <a href="privacy.html">
-          <span data-vi>Chính sách Quyền riêng tư</span>
-          <span data-en>Privacy Policy</span>
-        </a>
+        <a href="index.html"><span data-vi>Trung tâm Hỗ trợ</span><span data-en>Support Hub</span></a>
+        <a href="privacy.html"><span data-vi>Chính sách Quyền riêng tư</span><span data-en>Privacy Policy</span></a>
         <a href="mailto:nguyenhuutuong1222@gmail.com">nguyenhuutuong1222@gmail.com</a>
       </div>
     </div>
